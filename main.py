@@ -13,7 +13,7 @@ from time import time_ns
 SERIAL_PORT = '/dev/ttyUSB0'
 INFLUX_URL = 'http://192.168.29.171'
 INFLUX_PORT = 8086
-INFLUX_DB_NAME = 'mydb'
+INFLUX_DB_NAME = 'espresso'
 MEASUREMENT = 'temperature'
 
 def main():

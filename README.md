@@ -19,3 +19,25 @@ Adapted from https://learn.adafruit.com/adafruit-mini-pitft-135x240-color-tft-ad
 1. Install DejaVu TTF Font: ```sudo apt-get install ttf-dejavu```
 1. Install Python Imaging Library: ```sudo apt-get install python3-pil```
 1. Install NumPy (which is used for some RGB_Display library optimizations): ```sudo apt-get install python3-numpy```
+
+### Running
+
+I setup as a service to run on boot: 
+
+```sudo systemctl --force --full edit coffeemonitor.service```
+
+In the config, enter:
+
+```
+[Unit]
+Description=lelit marax temperature data collection
+After=multi-user.target
+
+[Service]
+User=pi
+WorkingDirectory=/home/pi
+ExecStart=/usr/bin/python3 /home/pi/coffee-sensor-client/main.py
+
+[Install]
+WantedBy=multi-user.target
+```

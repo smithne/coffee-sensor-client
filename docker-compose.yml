@@ -1,0 +1,34 @@
+version: "3.6"
+services:
+  influxdb:
+    # https://hub.docker.com/r/arm32v7/influxdb/
+    image: "arm32v7/influxdb:1.8"
+    restart: always
+    ports:
+      - "8086:8086"
+    networks:
+      - espresso-monitor
+    volumes:
+      - influxdb-volume:/var/lib/influxdb
+
+  grafana:
+    # https://hub.docker.com/r/grafana/grafana
+    image: "grafana/grafana"
+    restart: always
+    depends_on:
+      - influxdb
+    ports:
+      - "3000:3000"
+    networks:
+      - espresso-monitor
+    volumes:
+      - grafana-volume:/var/lib/grafana
+  
+networks:
+  espresso-monitor:
+
+volumes:
+  influxdb-volume:
+    external: true
+  grafana-volume:
+    external: true
